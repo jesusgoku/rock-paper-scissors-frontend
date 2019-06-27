@@ -1,0 +1,19 @@
+<div *ngIf="!rounds.length" class="alert alert-light text-center">
+  <p class="lead">There are no rounds to show</p>
+</div>
+
+<table class="table" *ngIf="rounds.length">
+  <thead>
+    <tr>
+      <th class="text-right w-25">Round</th>
+      <th>Winner</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let round of rounds; let index = index">
+      <td class="text-right">{{ index + 1 }}</td>
+      <td>{{ round.player_winner === null ? 'Tie' : (round.player_winner ? playerTwo : playerOne) }}</td>
+    </tr>
+  </tbody>
+</table>
