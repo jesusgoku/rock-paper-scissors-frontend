@@ -10,6 +10,7 @@ import { Game } from '../game';
 })
 export class RoundComponent implements OnInit {
   loading: boolean = true;
+  errorMessage: string = '';
   game: Game = null;
   isGameFinished: boolean;
   roundNumber: number;
@@ -40,32 +41,38 @@ export class RoundComponent implements OnInit {
 
   createGame() {
     this.loading = true;
+    this.errorMessage = '';
 
     this
       .gameService
       .createGame([this.game.player_one, this.game.player_two])
       .then(game => { this.router.navigateByUrl(`/${game.id}`); return game; })
+      .catch(() => { this.errorMessage = 'An error has ocurred'; })
       .then(() => { this.loading = false; })
   }
 
   getGame(gameId) {
     this.loading = true;
+    this.errorMessage = '';
 
     return this
       .gameService
       .getGame(gameId)
       .then(game => this.roundInit(game))
+      .catch(() => { this.errorMessage = 'An error has ocurred'; })
       .then(() => { this.loading = false; })
       ;
   }
 
   playRound() {
     this.loading = true;
+    this.errorMessage = '';
 
     this
       .gameService
       .playRound(this.game.id, this.movements)
       .then(game => this.roundInit(game))
+      .catch(() => { this.errorMessage = 'An error has ocurred'; })
       .then(() => { this.loading = false; })
       ;
   }

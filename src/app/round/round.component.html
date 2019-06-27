@@ -7,7 +7,8 @@
     </p>
 
     <p class="text-center">
-      <button (click)="handlePlayAgainButtonClick()" class="btn btn-lg btn-primary">Play again</button>
+      <button (click)="handlePlayAgainButtonClick()" class="btn btn-lg btn-primary" [disabled]="loading">Play
+        again</button>
     </p>
   </div>
 
@@ -28,10 +29,10 @@
 
         <div class="form-group">
           <button *ngIf="this.step === 1" (click)="handlePlayRoundClick()" class="btn btn-primary"
-            [disabled]="move.invalid">Play Round</button>
+            [disabled]="move.invalid || loading">Play Round</button>
 
           <button *ngIf="this.step === 0" (click)="handleNextPlayerClick()" class="btn btn-primary"
-            [disabled]="move.invalid">Next Player</button>
+            [disabled]="move.invalid || loading">Next Player</button>
         </div>
       </div>
 
@@ -44,5 +45,5 @@
 </div>
 
 
-
+<div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
 <app-loading [loading]="loading"></app-loading>

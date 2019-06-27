@@ -9,6 +9,7 @@ import { GameService } from '../game.service';
 })
 export class GameComponent implements OnInit {
   loading: boolean = false;
+  errorMessage: string = '';
   playerOne: string = '';
   playerTwo: string = '';
 
@@ -23,11 +24,13 @@ export class GameComponent implements OnInit {
 
   createGame(players: string[]) {
     this.loading = true;
+    this.errorMessage = '';
 
     return this
       .gameService
       .createGame(players)
       .then(game => { this.router.navigateByUrl(`/${game.id}`) })
+      .catch(e => { this.errorMessage = 'An error has ocurred' })
       .then(() => { this.loading = false; })
       ;
   }
