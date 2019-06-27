@@ -18,6 +18,14 @@ yarn run build --prod
 # Publish files generated on: dist/ folder
 ```
 
+## Notes
+
+Some notes about implementation:
+
+- The focus is on functionality over UI
+- GameService use Promise approach
+- Use template-driven forms instead ReactiveForms
+
 ## Related projects
 
 - [Rock, Paper and Scissors - Backend](https://github.com/jesusgoku/rock-paper-scissors-backend)
